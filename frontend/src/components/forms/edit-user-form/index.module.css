@@ -1,0 +1,9 @@
+.formConatiner {
+    height: calc(100% - 64px);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
