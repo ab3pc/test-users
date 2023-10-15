@@ -15,6 +15,7 @@ import {
 	SortTypesTable,
 	UsersFilterKeys,
 } from "../../common/types/types";
+import { getSortOrder } from "../../common/helpers";
 
 export const Main: React.FC = () => {
 	const { users, dataStatus, auth } = useAppSelector((state) => ({
@@ -34,11 +35,14 @@ export const Main: React.FC = () => {
 
 	const handleTableChange = (
 		pagination: TablePaginationConfig,
-		filters: Record<string, FilterValue>,
-		sorter: SorterResult<DataUserTableType>,
-	) => {
-		const order = sorter?.order || SortTypesTable.ASC;
-		const sortBy = SortTypesFetchData[order];
+		filters: Record<string, FilterValue | null>,
+		sorter: SorterResult<DataUserTableType> | SorterResult<DataUserTableType>[],
+	): void => {
+		const orderType =
+			(sorter as SorterResult<DataUserTableType>)?.order || SortTypesTable.ASC;
+		const sortBy = SortTypesFetchData[orderType];
+		console.log("handleTableChange", sorter);
+
 		setSearchParams({ sort: sortBy });
 	};
 
@@ -98,13 +102,11 @@ export const Main: React.FC = () => {
 		setSelectedUser(null);
 	};
 
-	const handleSubmitEditUser = async (data: DataUserTableType) => {
+	const handleSubmitEditUser = (data: DataUserTableType) => {
 		const newUserData = { ...data, id: selectedUser?.key as number };
-
-		const res = await dispatch(usersActions.updateUser(newUserData));
-		if (!res?.error) {
-			handleOnCloseEditUser();
-		}
+		dispatch(usersActions.updateUser(newUserData))
+			.unwrap()
+			.then(() => handleOnCloseEditUser());
 	};
 
 	return (
@@ -115,7 +117,7 @@ export const Main: React.FC = () => {
 					onDelete={handleOnDeleteUser}
 					onEdit={handleOnEditUser}
 					currentUserId={auth.user?.id}
-					tableParams={{ order: SortTypesTable[sortTypeValue] }}
+					tableParams={{ order: getSortOrder(sortTypeValue) }}
 					handleTableChange={handleTableChange}
 					loading={isLoading}
 				/>

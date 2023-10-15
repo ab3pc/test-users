@@ -11,6 +11,7 @@ import {
 	UserSignInResponseDto,
 	UserSignUpRequestDto,
 	UserSignUpResponseDto,
+	UserUpdateResponseDto,
 } from "../../../common/enums/users/users";
 
 type Constructor = {
@@ -42,7 +43,7 @@ class AuthApi {
 		});
 	}
 
-	public getCurrentUser(): Promise<UserDetailsResponseDto> {
+	public getCurrentUser(): Promise<UserUpdateResponseDto> {
 		return this.#http.load(`${ENV.API_PATH}${AuthApiPath.CURRENT_USER}`, {
 			contentType: ContentType.JSON,
 		});

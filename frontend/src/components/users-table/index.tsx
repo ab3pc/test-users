@@ -28,8 +28,8 @@ type TableProps = {
 	tableParams?: TableParams;
 	handleTableChange: (
 		pagination: TablePaginationConfig,
-		filters: Record<string, FilterValue>,
-		sorter: SorterResult<DataUserTableType>,
+		filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<DataUserTableType> | SorterResult<DataUserTableType>[]
 	) => void;
 };
 

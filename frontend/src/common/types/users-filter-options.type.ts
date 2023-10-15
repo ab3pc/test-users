@@ -1,8 +1,8 @@
-const SortTypesTable = {
-	ASC: "ascend",
-	DESC: "descend",
-	NONE: "undefined",
-} as const;
+enum SortTypesTable {
+	ASC = "ascend",
+	DESC = "descend",
+	NONE = "undefined",
+}
 
 const SortTypesFetchData = {
 	ascend: "ASC",
