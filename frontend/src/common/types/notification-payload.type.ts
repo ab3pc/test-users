@@ -1,8 +1,8 @@
-import { NotificationType } from "../enums/notification/notification"
+import { NotificationType } from "../enums/notification/notification";
 
 type NotificationPayload = {
-  type: NotificationType
-  message: string
-}
+	type: NotificationType;
+	message: string;
+};
 
-export { type NotificationPayload }
+export { type NotificationPayload };

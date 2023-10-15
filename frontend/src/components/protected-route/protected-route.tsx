@@ -1,26 +1,24 @@
-
-import React, { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AppRoute, StorageKey } from '../../common/enums/enums';
-import { storage } from '../../store/services/services';
+import React, { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { AppRoute, StorageKey } from "../../common/enums/enums";
+import { storage } from "../../store/services/services";
 
 type Props = {
-  redirectTo?: AppRoute;
-  component: ReactNode;
+	redirectTo?: AppRoute;
+	component: ReactNode;
 };
 
 const ProtectedRoute: React.FC<Props> = ({
-  redirectTo = AppRoute.SIGN_IN,
-  component,
+	redirectTo = AppRoute.SIGN_IN,
+	component,
 }) => {
-  const hasToken = Boolean(storage.getItem(StorageKey.ACCESS_TOKEN))
+	const hasToken = Boolean(storage.getItem(StorageKey.ACCESS_TOKEN));
 
+	if (!hasToken) {
+		return <Navigate to={redirectTo} />;
+	}
 
-  if (!hasToken) {
-    return <Navigate to={redirectTo} />;
-  }
-
-  return <>{component}</>;
+	return <>{component}</>;
 };
 
 export { ProtectedRoute };

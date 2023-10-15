@@ -1,5 +1,5 @@
 enum ActionType {
-  NOTIFY = 'app/notify',
+	NOTIFY = "app/notify",
 }
 
 export { ActionType };

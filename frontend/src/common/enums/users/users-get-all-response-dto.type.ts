@@ -1,7 +1,7 @@
-import { UserDetailsResponseDto } from "./user.type"
+import { UserDetailsResponseDto } from "./user.type";
 
 type UsersGetAllResponseDto = {
-  data: UserDetailsResponseDto[]
-}
+	data: UserDetailsResponseDto[];
+};
 
-export { type UsersGetAllResponseDto }
+export { type UsersGetAllResponseDto };

@@ -1,10 +1,10 @@
-import { UserDetailsResponseDto } from "./user.type"
+import { UserDetailsResponseDto } from "./user.type";
 
 type UserSignInResponseDto = {
-  data: {
-    user: UserDetailsResponseDto
-    token: string
-  }
-}
+	data: {
+		user: UserDetailsResponseDto;
+		token: string;
+	};
+};
 
-export { type UserSignInResponseDto }
+export { type UserSignInResponseDto };

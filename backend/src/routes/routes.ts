@@ -7,7 +7,7 @@ import {
   login,
   logout,
   register,
-  userDetail,
+  userDetails,
 } from "../controllers/controllers";
 import { updateUserValidation } from "../common/middleware/validation/update-user-validation";
 import { deleteUser, updateUser } from "../controllers/user-controller";
@@ -16,7 +16,7 @@ const router = Router();
 
 router.post(ApiPath.SIGN_UP, registerValidation, register);
 router.post(ApiPath.SIGN_IN, login);
-router.get(ApiPath.ME, isAuthenticated, userDetail);
+router.get(ApiPath.ME, isAuthenticated, userDetails);
 router.get(ApiPath.LOG_OUT, isAuthenticated, logout);
 router.get(ApiPath.USERS, isAuthenticated, getUsers);
 router.patch(ApiPath.USERS, isAuthenticated, updateUserValidation, updateUser);

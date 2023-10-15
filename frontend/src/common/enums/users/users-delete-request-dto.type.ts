@@ -1,5 +1,5 @@
 type UserDeleteRequestDto = {
-  id: number
-}
+	id: number;
+};
 
-export { type UserDeleteRequestDto }
+export { type UserDeleteRequestDto };

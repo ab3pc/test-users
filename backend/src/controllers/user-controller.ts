@@ -64,7 +64,7 @@ const refreshToken = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const userDetail = async (req: Request, res: Response): Promise<Response> => {
+const userDetails = async (req: Request, res: Response): Promise<Response> => {
   try {
     const email = res.locals.userEmail;
     const user = await User.findOne({
@@ -196,4 +196,4 @@ const deleteUser = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-export { getUsers, refreshToken, userDetail, updateUser, deleteUser };
+export { getUsers, refreshToken, userDetails, updateUser, deleteUser };

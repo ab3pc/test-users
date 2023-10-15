@@ -1,13 +1,10 @@
 import { Sequelize } from "sequelize";
+import { getEnv } from "../common/helpers/env";
 
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const dbName = process.env.DB_NAME as string;
-const dbHost = process.env.DB_HOST;
-const dbUsername = process.env.DB_USER as string;
-const dbPassword = process.env.DB_PASS;
+const dbName = getEnv("DB_NAME");
+const dbHost = getEnv("DB_HOST");
+const dbUsername = getEnv("DB_USER");
+const dbPassword = getEnv("DB_PASS");
 const dbDialect = "postgres";
 
 const dbConnection = new Sequelize(dbName, dbUsername, dbPassword, {

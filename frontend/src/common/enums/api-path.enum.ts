@@ -1,5 +1,5 @@
 enum ApiPath {
-  USERS = '/users',
+	USERS = "/users",
 }
 
 export { ApiPath };

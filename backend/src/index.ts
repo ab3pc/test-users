@@ -1,21 +1,29 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import router from "./routes/routes";
-
-
-dotenv.config();
+import { getEnv } from "./common/helpers/helpers";
+import { initRepositories } from "./repositories";
+import { initServices } from "./services";
+import { initRoutes } from "./routes";
 
 const app = express();
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors({
-	credentials: true,
-	origin: true
-}));
-app.use(router);
 
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Running on port ${process.env.APP_PORT}`);
-});
+const repositories = initRepositories();
+const services = initServices(repositories);
+const routes = initRoutes(services);
+const port = getEnv("APP_PORT");
+
+app
+  .use(express.json())
+  .use(cookieParser())
+  .use(
+    cors({
+      credentials: true,
+      origin: true,
+    })
+  )
+  .use(routes)
+  .listen(port, () => {
+    console.log(`Running on port ${port}`);
+  });

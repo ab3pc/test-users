@@ -1,108 +1,107 @@
 import {
-  ContentType,
-  ExceptionMessage,
-  HttpCode,
-  HttpHeader,
-  HttpMethod,
-  StorageKey,
-} from "../../../common/enums/enums"
+	ContentType,
+	ExceptionMessage,
+	HttpCode,
+	HttpHeader,
+	HttpMethod,
+	StorageKey,
+} from "../../../common/enums/enums";
 import {
-  HttpError,
-  InvalidCredentialsError,
-} from "../../../common/exceptions/exeptions"
-import { HttpOptions } from "../../../common/types/types"
-import { Storage } from "../storage/storage.service"
+	HttpError,
+	InvalidCredentialsError,
+} from "../../../common/exceptions/exeptions";
+import { HttpOptions } from "../../../common/types/types";
+import { Storage } from "../storage/storage.service";
 
 type Constructor = {
-  storage: Storage
-}
+	storage: Storage;
+};
 
 class Http {
-  #storage: Storage
+	#storage: Storage;
 
-  public constructor({ storage }: Constructor) {
-    this.#storage = storage
-  }
+	public constructor({ storage }: Constructor) {
+		this.#storage = storage;
+	}
 
-  public load<T = unknown>(
-    url: string,
-    options: Partial<HttpOptions> = {},
-  ): Promise<T> {
-    const {
-      method = HttpMethod.GET,
-      payload = null,
-      contentType,
-      hasAuth = true,
-      queryString,
-    } = options
-   
-    const headers = this.getHeaders(contentType, hasAuth)
-    
-    
-    return fetch(this.getUrlWithQueryString(url, queryString), {
-      method,
-      headers,
-      body: payload,
-    })
-      .then(this.checkStatus)
-      .then((res) => this.parseJSON<T>(res))
-      .catch(this.throwError)
-  }
+	public load<T = unknown>(
+		url: string,
+		options: Partial<HttpOptions> = {},
+	): Promise<T> {
+		const {
+			method = HttpMethod.GET,
+			payload = null,
+			contentType,
+			hasAuth = true,
+			queryString,
+		} = options;
 
-  private getHeaders(contentType?: ContentType, hasAuth?: boolean): Headers {
-    const headers = new Headers()
+		const headers = this.getHeaders(contentType, hasAuth);
 
-    if (contentType) {
-      headers.append(HttpHeader.CONTENT_TYPE, contentType)
-    }
+		return fetch(this.getUrlWithQueryString(url, queryString), {
+			method,
+			headers,
+			body: payload,
+		})
+			.then(this.checkStatus)
+			.then((res) => this.parseJSON<T>(res))
+			.catch(this.throwError);
+	}
 
-    if (hasAuth) {
-      const token = this.#storage.getItem(StorageKey.ACCESS_TOKEN)
-      headers.append(HttpHeader.AUTHORIZATION, `Bearer ${token}`)
-    }
-    return headers
-  }
+	private getHeaders(contentType?: ContentType, hasAuth?: boolean): Headers {
+		const headers = new Headers();
 
-  private getUrlWithQueryString(
-    url: string,
-    queryString?: Record<string, unknown>,
-  ): string {
-    if (!queryString) {
-      return url
-    }
-    const query = new URLSearchParams(
-      queryString as Record<string, string>,
-    ).toString()
+		if (contentType) {
+			headers.append(HttpHeader.CONTENT_TYPE, contentType);
+		}
 
-    return `${url}?${query}`
-  }
+		if (hasAuth) {
+			const token = this.#storage.getItem(StorageKey.ACCESS_TOKEN);
+			headers.append(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
+		}
+		return headers;
+	}
 
-  private async checkStatus(response: Response): Promise<Response> {
-    if (response.status === HttpCode.UNAUTHORIZED) {
-      throw new InvalidCredentialsError(ExceptionMessage.UNAUTHORIZED_USER)
-    }
+	private getUrlWithQueryString(
+		url: string,
+		queryString?: Record<string, unknown>,
+	): string {
+		if (!queryString) {
+			return url;
+		}
+		const query = new URLSearchParams(
+			queryString as Record<string, string>,
+		).toString();
 
-    if (!response.ok) {
-      const parsedException = await response.json().catch(() => ({
-        message: response.statusText,
-      }))
+		return `${url}?${query}`;
+	}
 
-      throw new HttpError({
-        status: response.status,
-        message: parsedException?.message,
-      })
-    }
+	private async checkStatus(response: Response): Promise<Response> {
+		if (response.status === HttpCode.UNAUTHORIZED) {
+			throw new InvalidCredentialsError(ExceptionMessage.UNAUTHORIZED_USER);
+		}
 
-    return response
-  }
+		if (!response.ok) {
+			const parsedException = await response.json().catch(() => ({
+				message: response.statusText,
+			}));
 
-  private parseJSON<T>(response: Response): Promise<T> {
-    return response.json()
-  }
+			throw new HttpError({
+				status: response.status,
+				message: parsedException?.message,
+			});
+		}
 
-  private throwError(err: Error): never {
-    throw err
-  }
+		return response;
+	}
+
+	private parseJSON<T>(response: Response): Promise<T> {
+		return response.json();
+	}
+
+	private throwError(err: Error): never {
+		throw err;
+	}
 }
 
-export { Http }
+export { Http };

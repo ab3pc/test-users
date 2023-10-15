@@ -1,31 +1,31 @@
-import { StorageKey } from "../../../common/enums/enums"
+import { StorageKey } from "../../../common/enums/enums";
 
 type Constructor = {
-  storage: globalThis.Storage
-}
+	storage: globalThis.Storage;
+};
 
 class Storage {
-  #storage: globalThis.Storage
+	#storage: globalThis.Storage;
 
-  public constructor({ storage }: Constructor) {
-    this.#storage = storage
-  }
+	public constructor({ storage }: Constructor) {
+		this.#storage = storage;
+	}
 
-  public getItem(key: StorageKey): string | null {
-    return this.#storage.getItem(key)
-  }
+	public getItem(key: StorageKey): string | null {
+		return this.#storage.getItem(key);
+	}
 
-  public setItem(key: StorageKey, value: string): void {
-    return this.#storage.setItem(key, value)
-  }
+	public setItem(key: StorageKey, value: string): void {
+		return this.#storage.setItem(key, value);
+	}
 
-  public removeItem(key: StorageKey): void {
-    return this.#storage.removeItem(key)
-  }
+	public removeItem(key: StorageKey): void {
+		return this.#storage.removeItem(key);
+	}
 
-  public clear(): void {
-    return this.#storage.clear()
-  }
+	public clear(): void {
+		return this.#storage.clear();
+	}
 }
 
-export { Storage }
+export { Storage };

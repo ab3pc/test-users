@@ -1,5 +1,5 @@
 enum StorageKey {
-  ACCESS_TOKEN = 'accessToken',
+	ACCESS_TOKEN = "accessToken",
 }
 
 export { StorageKey };

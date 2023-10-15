@@ -1,9 +1,9 @@
-import { reducer as auth } from "./auth/reducer"
-import { reducer as users } from "./users/reducer"
+import { reducer as auth } from "./auth/reducer";
+import { reducer as users } from "./users/reducer";
 
 const rootReducer = {
-  auth,
-  users,
-}
+	auth,
+	users,
+};
 
-export { rootReducer }
+export { rootReducer };
