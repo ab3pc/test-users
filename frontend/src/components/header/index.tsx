@@ -5,15 +5,12 @@ import {
 	UserOutlined,
 } from "@ant-design/icons";
 import { Layout, Space, Typography } from "antd";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-//import { logout, selectUser } from "../../features/auth/authSlice";
-//import { CustomButton } from "../custom-button";
-import { AppRoute, StorageKey } from "../../common/enums/enums";
+import { AppRoute } from "../../common/enums/enums";
+import { authActions } from "../../store/actions";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CustomButton } from "../custom-button";
 import style from "./index.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { authActions } from "../../store/actions";
 
 export const Header: React.FC = () => {
 	const dispatch = useAppDispatch();

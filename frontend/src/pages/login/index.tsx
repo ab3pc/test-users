@@ -26,9 +26,8 @@ export const Login: React.FC<Props> = ({ onSubmit }) => {
 					</Form>
 					<Space direction="vertical" size="large">
 						<Typography.Text>
-							Don't Have an Account?<Link to={AppRoute.SIGN_UP}> Register</Link>
+							Don't Have an account?<Link to={AppRoute.SIGN_UP}> Register</Link>
 						</Typography.Text>
-						{/* <ErrorMessage message={error} /> */}
 					</Space>
 				</Card>
 			</Row>

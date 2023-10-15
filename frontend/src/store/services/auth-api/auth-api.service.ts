@@ -6,7 +6,6 @@ import {
 	HttpMethod,
 } from "../../../common/enums/enums";
 import {
-	UserDetailsResponseDto,
 	UserSignInRequestDto,
 	UserSignInResponseDto,
 	UserSignUpRequestDto,

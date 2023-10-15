@@ -11,7 +11,6 @@ import {
 	UsersGetAllResponseDto,
 } from "../../../common/enums/users/users";
 import { UsersFilterOptions } from "../../../common/types/types";
-import { TableParams } from "../../../components/users-table";
 import { Http } from "../http/http.service";
 
 type Constructor = {

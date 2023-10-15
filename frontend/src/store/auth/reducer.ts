@@ -1,5 +1,4 @@
 import { createReducer } from "@reduxjs/toolkit";
-
 import { getCurrentUser, logout, signIn, signUp } from "./actions";
 import { UserDetailsResponseDto } from "../../common/enums/users/users";
 import { DataStatus } from "../../common/enums/enums";

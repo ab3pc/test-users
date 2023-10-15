@@ -14,6 +14,7 @@ export const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 	const { user } = useAppSelector((state) => state.auth);
+	console.log(pathname, "pathname");
 
 	const hasUser = Boolean(user);
 
@@ -33,13 +34,13 @@ export const Auth: React.FC = () => {
 			case AppRoute.SIGN_UP: {
 				return <Register onSubmit={handleSignUpSubmit} />;
 			}
+			default:
+				return <Login onSubmit={handleSignInSubmit} />;
 		}
-
-		return null;
 	};
 
 	if (hasUser) {
-		return <Navigate to={AppRoute.ROOT} />;
+		return <Navigate to={AppRoute.USERS} />;
 	}
 
 	return <>{getScreen(pathname)}</>;
