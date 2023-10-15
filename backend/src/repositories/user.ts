@@ -13,7 +13,6 @@ export class UserRepository {
     sortByValue: string | null,
     sortByCol: string
   ): Promise<User[]> {
-    console.log("getAll");
 
     return this._dbClient.findAll({
       attributes: ["id", "fullname", "email", "phone"],
