@@ -70,6 +70,4 @@ User.init(
   }
 );
 
-//User.belongsTo(Role, { foreignKey: "roleId" });
-
 export { User };

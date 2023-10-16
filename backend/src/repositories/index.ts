@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize';
 import { RepositoriesInit } from '../common/types';
 import { UserRepository } from './user';
 import { User } from '../db/models/User';
