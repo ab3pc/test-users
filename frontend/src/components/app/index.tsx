@@ -11,7 +11,7 @@ import { Spinner } from "../loader";
 import { ProtectedRoute } from "../protected-route/protected-route";
 
 const App: React.FC = () => {
-	const { user, dataStatus } = useAppSelector((state) => state.auth);
+	const { dataStatus } = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 
 	const isLoading = dataStatus === DataStatus.PENDING;

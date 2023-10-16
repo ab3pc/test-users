@@ -41,7 +41,6 @@ export const Main: React.FC = () => {
 		const orderType =
 			(sorter as SorterResult<DataUserTableType>)?.order || SortTypesTable.ASC;
 		const sortBy = SortTypesFetchData[orderType];
-		console.log("handleTableChange", sorter);
 
 		setSearchParams({ sort: sortBy });
 	};

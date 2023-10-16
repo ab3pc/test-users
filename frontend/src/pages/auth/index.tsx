@@ -14,7 +14,6 @@ export const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 	const { user } = useAppSelector((state) => state.auth);
-	console.log(pathname, "pathname");
 
 	const hasUser = Boolean(user);
 

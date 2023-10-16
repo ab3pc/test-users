@@ -10,7 +10,6 @@ const updateUserValidation =
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { fullname, email, phone, id } = req.body;
-      console.log('updateUserValidation', req.body);
       const data = {
         id,
         fullname,

@@ -28,8 +28,6 @@ const reducer = createReducer(initialState, (builder) => {
 		state.user = payload;
 	});
 	builder.addCase(signIn.fulfilled, (state, { payload }) => {
-		console.log(payload, "signIn.fulfilled");
-
 		state.dataStatus = DataStatus.FULFILLED;
 		state.user = payload;
 	});
