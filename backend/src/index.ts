@@ -1,7 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import router from "./routes/routes";
 import { getEnv } from "./common/helpers/helpers";
 import { initRepositories } from "./repositories";
 import { initServices } from "./services";
